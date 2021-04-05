@@ -4,10 +4,16 @@ from BRM_app.forms import NewBookForm
 from BRM_app.models import Book
 
 # Create your views here.
+def viewBooks(request):
+    books=book.objects.all()
+    res=render(request,'BRM_app/view_book.html',{'books':books})
+    return res
+
 def newBook(request):
     form=NewBookForm()
     res=render(request,'BRM_app/new_book.html',{'form':form})
     return res
+    
 def add(request):
     if request.method=='POST':
         form=NewBookForm(request.POST)
