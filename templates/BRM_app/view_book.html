@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{%load static%}
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
@@ -23,7 +24,7 @@
           <th>Author</th>
           <th>Publisher</th>
         </thead>
-        {{%for book in books%}}
+        {%for book in books%}
         <tr>
           <td>{{book.Title}}</td>
           <td>{{book.Price}}</td>
