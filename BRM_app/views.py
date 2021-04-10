@@ -4,6 +4,17 @@ from BRM_app.forms import NewBookForm
 from BRM_app import models
 
 # Create your views here.
+def searchBook(request):
+    form=SearchForm()
+    res=render(request,'BRM_app/search_book.html',{'form':form})
+    return res
+
+def search(request):
+    form=SearchForm(request.POST)
+    books=models.Book.objects.filter(title=form.data['title'])
+    res=render(request,'BRM_app/search_book.html',{'form':form,'books':books})
+    return res
+
 def deleteBook(request):
     bookid=request.GET['bookid']
     book=models.Book.objects.filter(id='bookid')

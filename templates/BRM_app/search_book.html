@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="{%static 'css/BRMstyle.css'%}">
+    <title>View Book Records</title>
+  </head>
+  <body>
+    <div id="head">
+      <h1>Book Record Management</h1>
+      <div id="nav">
+        <a href="/BRM_app/view-books">View All</a>
+        <a href="/BRM_app/new-book">Add New Book</a>
+        <a href="/BRM_app/search-book">Search</a>
+      </div>
+    </div>
+    <div id="main">
+      <h2>Search Book Records</h2>
+      <form action="BRM_app/search" method="post">
+        {%csrf_tokens%}
+        {{form}}
+      </form>
+
+      {%if books%}
+      <table>
+        <thead>
+          <th>Book Title</th>
+          <th>Price</th>
+          <th>Author</th>
+          <th>Publisher</th>
+        </thead>
+        {%end if%}
+        {%for book in books%}
+        <tr>
+          <td>{{book.title}}</td>
+          <td>{{book.price}}</td>
+          <td>{{book.author}}</td>
+          <td>{{book.publisher}}</td>
+        </tr>
+        {%endfor%}
+      </table>
+    </div>
+
+  </body>
+</html>
