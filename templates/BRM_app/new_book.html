@@ -17,9 +17,10 @@
     </div>
     <div id="main">
       <h2>Add New Book Record</h2>
-      <form class="" action="BRM_app/add" method="post">
+      <form action="BRM_app/add" method="post">
         {%csrf_token%}
         {{form}}
+        <input type="submit" value="Add">
       </form>
     </div>
 

@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
-from BRM_app.forms import NewBookForm
+from BRM_app.forms import NewBookForm, SearchForm
 from BRM_app import models
 
 # Create your views here.
@@ -11,19 +11,19 @@ def searchBook(request):
 
 def search(request):
     form=SearchForm(request.POST)
-    books=models.Book.objects.filter(title=form.data['title'])
+    books=models.Book.objects.filter(Title=form.data['title'])
     res=render(request,'BRM_app/search_book.html',{'form':form,'books':books})
     return res
 
 def deleteBook(request):
     bookid=request.GET['bookid']
-    book=models.Book.objects.filter(id='bookid')
+    book=models.Book.objects.filter(id=bookid)
     book.delete()
-    return HttpResponseRedirect('BRM_app/view-book')
+    return HttpResponseRedirect('BRM_app/view-books')
 
 def editBook(request):
-    book=models.Book.object.get(id=request.GET['bookid'])
-    fields={'title':book.Title,'price':book.Price,'author':book.Author,'Publisher':book.publisher}
+    book=models.Book.objects.get(id=request.GET['bookid'])
+    fields={'title':book.Title,'price':book.Price,'author':book.Author,'Publisher':book.Publisher}
     form=NewBookForm(initial=fields)
     res=render(request,'BRM_app/edit_book.html',{'form':form,'book':book})
     return res
@@ -36,9 +36,9 @@ def edit(request):
         book.Title=form.data['title']
         book.Price=form.data['price']
         book.Author=form.data['author']
-        book.publisher=form.data['publisher']
+        book.Publisher=form.data['publisher']
         book.save()
-        return HttpResponseRedirect('BRM_app/view-book')
+        return HttpResponseRedirect('BRM_app/view-books')
 
 def viewBooks(request):
     books=models.Book.objects.all()

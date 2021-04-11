@@ -18,8 +18,9 @@
     <div id="main">
       <h2>Search Book Records</h2>
       <form action="BRM_app/search" method="post">
-        {%csrf_tokens%}
+        {%csrf_token%}
         {{form}}
+        <input type="submit" value="search">
       </form>
 
       {%if books%}
@@ -30,13 +31,13 @@
           <th>Author</th>
           <th>Publisher</th>
         </thead>
-        {%end if%}
+        {%endif%}
         {%for book in books%}
         <tr>
-          <td>{{book.title}}</td>
-          <td>{{book.price}}</td>
-          <td>{{book.author}}</td>
-          <td>{{book.publisher}}</td>
+          <td>{{book.Title}}</td>
+          <td>{{book.Price}}</td>
+          <td>{{book.Author}}</td>
+          <td>{{book.Publisher}}</td>
         </tr>
         {%endfor%}
       </table>
