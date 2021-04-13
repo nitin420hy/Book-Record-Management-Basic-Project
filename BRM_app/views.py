@@ -21,7 +21,7 @@ def userLogin(request):
     else:
         return render(request,'BRM_app/user_login.html',data)
 
-def userlogout(request):
+def userLogout(request):
     logout(request)
     return HttpResponseRedirect('/BRM_app/login')
 
